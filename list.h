@@ -1,8 +1,8 @@
 // =================================================================
 //
 // File: list.h
-// Author:
-// Date:
+// Author: Fernanda Torres
+// Date: 26/09/2022
 // 
 // =================================================================
 #ifndef LIST_H
@@ -223,10 +223,24 @@ T List<T>::last() const {
 // =================================================================
 template <class T>
 T List<T>::get(uint index) const {
+	Node<T> *p, *q; //arrays
 	T aux;
+	int pos = 0;
 
 	// TO DO
-	return aux;
+	//agregar elementos a aux
+
+  p = head;
+  while (p != 0) {
+    if (val == p->value) {
+      return pos;
+    }
+    pos++;
+    p = p->next;
+  }
+  return -1;
+	
+	// return aux;
 }
 
 // =================================================================
@@ -276,6 +290,19 @@ void List<T>::push_back(T val) {
 template <class T>
 void List<T>::insert_at(T val, uint index) {
 	// TO DO
+	  Node<T> *p;
+  int pos = 0;
+  
+  if (index < 0 || index >= size) {
+    cout << "Index out of bounds" << endl;
+  }
+  
+  p = head;
+  while (pos != index) {
+    p = p->next;
+    pos++;
+  }
+  p->value = val;
 }
 
 // =================================================================
@@ -346,8 +373,34 @@ T List<T>::pop_back() {
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
+	Node<T> *p, *q;
 	T aux;
 	// TO DO
+	int pos = 0;
+
+
+	if (index < 0 || index >= size) {
+        std::cout << "Index out of bounds";
+    }
+    
+    if(index==0){
+        return remove_at();
+    }
+
+    p = head;
+    q = 0;
+    while (pos != index) {
+        q = p;
+        p = p->next;
+        pos++;
+    }
+    val = p->value;
+    q->next = p->next;
+    
+    delete p;
+    return val;
+    size--;
+    
 	return aux;
 }
 
@@ -360,6 +413,17 @@ T List<T>::remove_at(uint index) {
 template <class T>
 long int List<T>::indexOf(T val) const {
 	// TO DO
+	  Node<T> *p;
+  int pos = 0;
+  
+  p = head;
+  while (p != 0) {
+    if (val == p->value) {
+      return pos;
+    }
+    pos++;
+    p = p->next;
+  }
 	return -1;
 }
 
